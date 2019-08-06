@@ -1,8 +1,18 @@
 <template>
-  <div class="vue-hamb-menu">
+  <div
+    class="vue-hamb-menu"
+    :style="{color: color}"
+  >
     <div
-      class="menu-icon-container"
-      :style="{color: color}"
+      v-if="position === 'right'"
+      class="menu-icon-right menu-icon-container"
+    >
+      <i class="material-icons menu-icon">menu</i>
+    </div>
+
+    <div
+      v-if="position === 'left'"
+      class="menu-icon-left menu-icon-container"
     >
       <i class="material-icons menu-icon">menu</i>
     </div>
@@ -17,6 +27,11 @@ export default {
       type: String,
       required: false,
       default: '#000'
+    },
+    position: {
+      type: String,
+      required: false,
+      default: 'right'
     }
   }
 }
@@ -29,10 +44,17 @@ export default {
 }
 
 .menu-icon-container {
-  position: absolute;
-  right: 20px;
+  position: fixed;
   top: 10px;
   cursor: pointer;
+}
+
+.menu-icon-right {
+  right: 20px;
+}
+
+.menu-icon-left {
+  left: 20px;
 }
 
 </style>
