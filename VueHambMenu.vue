@@ -1,6 +1,9 @@
 <template>
   <div class="vue-hamb-menu">
-    <div class="menu-icon-container">
+    <div
+      class="menu-icon-container"
+      :style="{color: color}"
+    >
       <i class="material-icons menu-icon">menu</i>
     </div>
   </div>
@@ -9,6 +12,13 @@
 <script>
 export default {
   name: 'VueHambMenu',
+  props: {
+    color: {
+      type: String,
+      required: false,
+      default: '#000'
+    }
+  }
 }
 </script>
 
