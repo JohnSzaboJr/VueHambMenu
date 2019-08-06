@@ -1,6 +1,8 @@
 <template>
   <div class="vue-hamb-menu">
-    <i class="material-icons">menu</i>
+    <div class="menu-icon-container">
+      <i class="material-icons menu-icon">menu</i>
+    </div>
   </div>
 </template>
 
@@ -12,8 +14,15 @@ export default {
 
 <style>
 
-.vue-hamb-menu {
+.menu-icon {
+  font-size: 50px;
+}
 
+.menu-icon-container {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  cursor: pointer;
 }
 
 </style>
