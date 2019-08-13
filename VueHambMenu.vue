@@ -7,10 +7,13 @@
       v-if="open"
       class="menu-back"
       :class="{halfOpacity: darken}"
+      @click="toggleMenu"
     />
+
     <div
       v-if="position === 'right'"
       class="menu-icon-right menu-icon-container"
+      :style="{top: vertical + 'px', right: horizontal + 'px'}"
       @click="toggleMenu"
     >
       <i class="material-icons menu-icon">menu</i>
@@ -19,15 +22,32 @@
     <div
       v-if="position === 'left'"
       class="menu-icon-left menu-icon-container"
+      :style="{top: vertical + 'px', left: horizontal + 'px'}"
+      @click="toggleMenu"
     >
       <i class="material-icons menu-icon">menu</i>
+    </div>
+    
+    <div 
+      v-if="open"
+      class="menu-slideout"
+      :class="{menuSlideoutLeft: position === 'left',
+              menuSlideoutRight: position === 'right'}"
+    >
+      <div
+        class="close-icon-container"
+        @click="toggleMenu"
+        :style="{color: closeColor}"
+        :class="{menuSlideoutLeft: position === 'right',
+                menuSlideoutRight: position === 'left'}"
+      >
+        <i class="material-icons close-icon">close</i>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
-  // add positioning values - horizontal, vertical
 
 export default {
   name: 'VueHambMenu',
@@ -51,7 +71,22 @@ export default {
       type: Boolean,
       required: false,
       default: false,
-    }
+    },
+    closeColor: {
+      type: String,
+      required: false,
+      default: '#fff'
+    },
+    horizontal: {
+      type: Number,
+      required: false,
+      default: 20
+    },
+    vertical: {
+      type: Number,
+      required: false,
+      default: 10
+    },
   },
   methods: {
     toggleMenu() {
@@ -73,7 +108,6 @@ export default {
 
 .menu-icon-container {
   position: fixed;
-  top: 10px;
   cursor: pointer;
 }
 
@@ -93,6 +127,28 @@ export default {
   right: 0px;
   background-color: #000;
   opacity: 0;
+}
+
+.menu-slideout {
+  width: 300px;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  background-color: #292929;
+}
+
+.menuSlideoutRight {
+  right: 0px;
+}
+
+.menuSlideoutLeft {
+  left: 0px;
+}
+
+.close-icon-container {
+  position: absolute;
+  margin: 10px;
+  cursor: pointer;
 }
 
 .halfOpacity {
