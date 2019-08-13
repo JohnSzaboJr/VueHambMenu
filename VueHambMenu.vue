@@ -4,7 +4,7 @@
     :style="{color: iconColor}"
   >
     <div
-      v-if="open"
+      v-if="slideOut"
       class="menu-back"
       :class="{halfOpacity: darken}"
       @click="toggleMenu"
@@ -33,14 +33,16 @@
       class="menu-slideout"
       :style="{backgroundColor: menuColor}"
       :class="{menuSlideoutLeft: position === 'left',
-              menuSlideoutRight: position === 'right'}"
+              menuSlideoutRight: position === 'right',
+              openRight: position === 'right' && slideOut,
+              openLeft: position === 'left' && slideOut}"
     >
       <div
         class="close-icon-container"
         @click="toggleMenu"
         :style="{color: linkColor}"
-        :class="{menuSlideoutLeft: position === 'right',
-                menuSlideoutRight: position === 'left'}"
+        :class="{closeIconRight: position === 'right',
+                closeIconLeft: position === 'left'}"
       >
         <i class="material-icons close-icon">close</i>
       </div>
@@ -55,6 +57,7 @@ export default {
   data() {
     return ({
       open: false,
+      slideOut: false,
     })
   },
   props: {
@@ -96,7 +99,17 @@ export default {
   },
   methods: {
     toggleMenu() {
-      this.open = !this.open;
+      if (this.open) {
+        this.slideOut = false;
+        setTimeout(() => {
+          this.open = false;
+        }, 300);
+      } else {
+        this.open = true;
+        setTimeout(() => {
+          this.slideOut = true;
+        }, 1);
+      }
     }
   }
 }
@@ -143,10 +156,20 @@ export default {
 }
 
 .menuSlideoutRight {
-  right: 0px;
+  right: -300px;
+  transition: right 300ms;
 }
 
 .menuSlideoutLeft {
+  left: -300px;
+  transition: left 300ms;
+}
+
+.openRight {
+  right: 0px;
+}
+
+.openLeft {
   left: 0px;
 }
 
@@ -154,6 +177,14 @@ export default {
   position: absolute;
   margin: 10px;
   cursor: pointer;
+}
+
+.closeIconRight {
+  left: 0px;
+}
+
+.closeIconLeft {
+  right: 0px;
 }
 
 .halfOpacity {
