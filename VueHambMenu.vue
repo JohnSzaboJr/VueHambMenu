@@ -31,20 +31,29 @@
     <div 
       v-if="open"
       class="menu-slideout"
-      :style="{backgroundColor: menuColor}"
+      :style="{backgroundColor: menuColor,
+              color: linkColor}"
       :class="{menuSlideoutLeft: position === 'left',
               menuSlideoutRight: position === 'right',
               openRight: position === 'right' && slideOut,
               openLeft: position === 'left' && slideOut}"
     >
       <div
-        class="close-icon-container"
+        class="close-icon-container noselect"
         @click="toggleMenu"
-        :style="{color: linkColor}"
         :class="{closeIconRight: position === 'right',
                 closeIconLeft: position === 'left'}"
       >
         <i class="material-icons close-icon">close</i>
+      </div>
+      <div class="menu-links">
+        <div
+          class="menu-link"
+          v-for="link in links"
+          :key="link.text"
+        >
+          <a :href="link.href">{{ link.text }}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -96,6 +105,11 @@ export default {
       required: false,
       default: 10
     },
+    links: {
+      type: Array,
+      required: false,
+      default: [],
+    }
   },
   methods: {
     toggleMenu() {
@@ -146,6 +160,21 @@ export default {
   right: 0px;
   background-color: #000;
   opacity: 0;
+}
+
+.menu-links {
+  position: absolute;
+  margin-top: 80px;
+  margin-left: 50px;
+}
+
+.menu-link {
+  margin-bottom: 40px;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
 }
 
 .menu-slideout {
