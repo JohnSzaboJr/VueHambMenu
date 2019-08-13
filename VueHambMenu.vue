@@ -1,7 +1,7 @@
 <template>
   <div
     class="vue-hamb-menu noselect"
-    :style="{color: color}"
+    :style="{color: iconColor}"
   >
     <div
       v-if="open"
@@ -31,13 +31,14 @@
     <div 
       v-if="open"
       class="menu-slideout"
+      :style="{backgroundColor: menuColor}"
       :class="{menuSlideoutLeft: position === 'left',
               menuSlideoutRight: position === 'right'}"
     >
       <div
         class="close-icon-container"
         @click="toggleMenu"
-        :style="{color: closeColor}"
+        :style="{color: linkColor}"
         :class="{menuSlideoutLeft: position === 'right',
                 menuSlideoutRight: position === 'left'}"
       >
@@ -57,10 +58,20 @@ export default {
     })
   },
   props: {
-    color: {
+    iconColor: {
       type: String,
       required: false,
       default: '#000'
+    },
+    linkColor: {
+      type: String,
+      required: false,
+      default: '#fff'
+    },
+    menuColor: {
+      type: String,
+      required: false,
+      default: '#292929'
     },
     position: {
       type: String,
@@ -71,11 +82,6 @@ export default {
       type: Boolean,
       required: false,
       default: false,
-    },
-    closeColor: {
-      type: String,
-      required: false,
-      default: '#fff'
     },
     horizontal: {
       type: Number,
@@ -134,7 +140,6 @@ export default {
   position: fixed;
   top: 0px;
   bottom: 0px;
-  background-color: #292929;
 }
 
 .menuSlideoutRight {
