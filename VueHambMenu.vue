@@ -46,11 +46,15 @@
       >
         <i class="material-icons close-icon">close</i>
       </div>
-      <div class="menu-links">
+      <div
+        class="menu-links"
+      >
         <div
           class="menu-link"
           v-for="link in links"
           :key="link.text"
+          :style="{fontSize: linkSize + 'px',
+                  marginBottom: linkSpacing + 'px'}"
         >
           <a :href="link.href">{{ link.text }}</a>
         </div>
@@ -109,7 +113,17 @@ export default {
       type: Array,
       required: false,
       default: [],
-    }
+    },
+    linkSize: {
+      type: Number,
+      required: false,
+      default: 18
+    },
+    linkSpacing: {
+      type: Number,
+      required: false,
+      default: 40
+    }, 
   },
   methods: {
     toggleMenu() {
@@ -129,7 +143,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
 
 .vue-hamb-menu {
   overflow: hidden;
@@ -164,17 +183,8 @@ export default {
 
 .menu-links {
   position: absolute;
-  margin-top: 80px;
-  margin-left: 50px;
-}
-
-.menu-link {
-  margin-bottom: 40px;
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
+  margin-top: 90px;
+  margin-left: 45px;
 }
 
 .menu-slideout {
