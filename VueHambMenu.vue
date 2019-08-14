@@ -136,7 +136,7 @@ export default {
         this.open = true;
         setTimeout(() => {
           this.slideOut = true;
-        }, 1);
+        }, 50);
       }
     }
   }
